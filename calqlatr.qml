@@ -52,7 +52,7 @@ Rectangle {
     id: window
     width: Screen.width
     height: Screen.height    
-    color: "#6da43d"
+    color: "#00E000"
     property variant windowMyMessageBox;
 
     Image {
@@ -69,16 +69,15 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: img_login.height / 2
         anchors.horizontalCenter: parent.horizontalCenter
-
         TextField {
             placeholderText: "login name"
             width: window.width / 2
-//            font.pixelSize: window.width / 20
-//            background: Rectangle {
-//                radius: 5
-//                border.color: "#FFFFFF"
-//                border.width: 2
-//            }
+            font.pixelSize: window.width / 20
+            background: Rectangle {
+                radius: 5
+                border.color: "#FFFFFF"
+                border.width: 2
+            }
         }
         TextField {
             placeholderText: "password"
@@ -97,6 +96,12 @@ Rectangle {
                 var component = Qt.createComponent("content/MyMessageBox.qml")
                 windowMyMessageBox = component.createObject(window)
                 windowMyMessageBox.show()
+            }
+            background: Rectangle {
+                radius: 5
+                color: "#00CC00"
+                border.color: "#FFFFFF"
+                border.width: 2
             }
         }
     }
