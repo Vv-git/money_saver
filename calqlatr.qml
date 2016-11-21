@@ -45,8 +45,6 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.1
 //import QtQuick.Dialogs 1.2
 import "content"
-import "content/calculator.js" as CalcEngine
-
 
 Rectangle {
     id: window
@@ -65,14 +63,14 @@ Rectangle {
     Grid {
         id: buttons
         columns: 1
-        rowSpacing: 16
+        rowSpacing: window.width / 36
         anchors.bottom: parent.bottom
         anchors.bottomMargin: img_login.height / 2
         anchors.horizontalCenter: parent.horizontalCenter
         TextField {
             placeholderText: "login name"
-            width: window.width / 2
-            font.pixelSize: window.width / 20
+            width: window.width * 0.7
+            font.pixelSize: window.width / 16
             background: Rectangle {
                 radius: 5
                 border.color: "#FFFFFF"
@@ -81,8 +79,8 @@ Rectangle {
         }
         TextField {
             placeholderText: "password"
-            width: window.width / 2
-            font.pixelSize: window.width / 20
+            width: window.width * 0.7
+            font.pixelSize: window.width / 16
             background: Rectangle {
                 radius: 5
                 border.color: "#FFFFFF"
@@ -91,7 +89,7 @@ Rectangle {
         }
         Button {
             text: "Login"
-            width: window.width / 2
+            width: window.width * 0.7
             onClicked: {
                 var component = Qt.createComponent("content/MyMessageBox.qml")
                 windowMyMessageBox = component.createObject(window)
