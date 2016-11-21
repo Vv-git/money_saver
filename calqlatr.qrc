@@ -9,5 +9,6 @@
         <file>content/images/paper-grip.png</file>
         <file>content/images/login_money.png</file>
         <file>content/MyMessageBox.qml</file>
+        <file>content/images/tab1_91x91.png</file>
     </qresource>
 </RCC>

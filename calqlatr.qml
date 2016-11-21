@@ -68,11 +68,12 @@ Rectangle {
         anchors.bottomMargin: img_login.height / 2
         anchors.horizontalCenter: parent.horizontalCenter
         TextField {
+            id: login
             placeholderText: "login name"
             width: window.width * 0.7
             font.pixelSize: window.width / 16
             background: Rectangle {
-                radius: 5
+                radius: 10
                 border.color: "#FFFFFF"
                 border.width: 2
             }
@@ -82,21 +83,23 @@ Rectangle {
             width: window.width * 0.7
             font.pixelSize: window.width / 16
             background: Rectangle {
-                radius: 5
+                radius: 10
                 border.color: "#FFFFFF"
                 border.width: 2
             }
         }
         Button {
             text: "Login"
-            width: window.width * 0.7
+            width: login.width
+            height: login.height
+            font: login.font
             onClicked: {
                 var component = Qt.createComponent("content/MyMessageBox.qml")
                 windowMyMessageBox = component.createObject(window)
                 windowMyMessageBox.show()
             }
             background: Rectangle {
-                radius: 5
+                radius: 10
                 color: "#00CC00"
                 border.color: "#FFFFFF"
                 border.width: 2

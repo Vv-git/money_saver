@@ -1,21 +1,36 @@
 import QtQuick 2.0
-
+import QtQuick.Controls 1.3
 import QtQuick.Window 2.1 // needed for the Window component
 
 Window {
     id: myMessageBox
     width: Screen.width
     height: Screen.height
-    color: "#00E000"
     visible: true
     flags: Qt.SubWindow | Qt.WindowStaysOnTopHint
-    Rectangle {
+    TabView {
         anchors.fill: parent
-        color: "#000000"
-        Text {
-            anchors.centerIn: parent
-            text: "My New Window"
-            color: "#FFFFFF"
+        Tab {
+            title: "tab1"
+            Rectangle {
+                anchors.fill: parent
+                Text {
+                    anchors.centerIn: parent
+                    text: "Tab 1"
+                    color: "#FFFFFF"
+                }
+            }
+        }
+        Tab {
+            title: "tab2"
+            Rectangle {
+                anchors.fill: parent
+                Text {
+                    anchors.centerIn: parent
+                    text: "Tab 2"
+                    color: "#FFFFFF"
+                }
+            }
         }
     }
 }
