@@ -15,7 +15,11 @@ OTHER_FILES = calqlatr.qml \
     content/images/paper-edge-right.png \
     content/images/paper-grip.png \
     content/images/login_money.png \
-    content/images/tab1_91x91.png
+    content/images/tab1.png \
+    content/images/tab2.png \
+    content/images/tab3.png \
+    content/images/tab4.png \
+    content/images/tab5.png
 
 target.path = $$[QT_INSTALL_EXAMPLES]/quick/demos/calqlatr
 INSTALLS += target
