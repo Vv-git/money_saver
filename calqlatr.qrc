@@ -1,15 +1,20 @@
 <RCC>
-    <qresource prefix="/demos/calqlatr">
+    <qresource prefix="/">
         <file>calqlatr.qml</file>
         <file>content/calculator.js</file>
         <file>content/Display.qml</file>
         <file>content/NumberPad.qml</file>
         <file>content/images/login_money.png</file>
-        <file>content/MyMessageBox.qml</file>
         <file>content/images/tab1.png</file>
         <file>content/images/tab2.png</file>
         <file>content/images/tab3.png</file>
         <file>content/images/tab4.png</file>
         <file>content/images/tab5.png</file>
+        <file>content/tabs.qml</file>
+        <file>content/images/tab1clicked.png</file>
+        <file>content/images/tab2clicked.png</file>
+        <file>content/images/tab3clicked.png</file>
+        <file>content/images/tab4clicked.png</file>
+        <file>content/images/tab5clicked.png</file>
     </qresource>
 </RCC>

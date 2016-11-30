@@ -46,63 +46,65 @@ import QtQuick.Layouts 1.1
 //import QtQuick.Dialogs 1.2
 import "content"
 
-Rectangle {
-    id: window
-    width: Screen.width
-    height: Screen.height    
-    color: "#00E000"
-    property variant windowMyMessageBox;
+StackView {
+    id: stackView
+    anchors.fill: parent
 
-    Image {
-        id: img_login
-        source: "content/images/login_money.png"
-        anchors.horizontalCenter: parent.horizontalCenter
-        y: height / 2
-    }
+    initialItem: Rectangle {
+        id: window
+        width: Screen.width
+        height: Screen.height
+        color: "#00E000"
 
-    Grid {
-        id: buttons
-        columns: 1
-        rowSpacing: window.width / 36
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: img_login.height / 2
-        anchors.horizontalCenter: parent.horizontalCenter
-        TextField {
-            id: login
-            placeholderText: "login name"
-            width: window.width * 0.7
-            font.pixelSize: window.width / 16
-            background: Rectangle {
-                radius: 10
-                border.color: "#FFFFFF"
-                border.width: 2
-            }
+        Image {
+            id: img_login
+            source: "content/images/login_money.png"
+            anchors.horizontalCenter: parent.horizontalCenter
+            y: height / 2
         }
-        TextField {
-            placeholderText: "password"
-            width: window.width * 0.7
-            font.pixelSize: window.width / 16
-            background: Rectangle {
-                radius: 10
-                border.color: "#FFFFFF"
-                border.width: 2
+
+        Grid {
+            id: buttons
+            columns: 1
+            rowSpacing: window.width / 36
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: img_login.height / 2
+            anchors.horizontalCenter: parent.horizontalCenter
+            TextField {
+                id: login
+                placeholderText: "login name"
+                width: window.width * 0.7
+                font.pixelSize: window.width / 16
+                background: Rectangle {
+                    radius: 10
+                    border.color: "#FFFFFF"
+                    border.width: 2
+                }
             }
-        }
-        Button {
-            text: "Login"
-            width: login.width
-            height: login.height
-            font: login.font
-            onClicked: {
-                var component = Qt.createComponent("content/MyMessageBox.qml")
-                windowMyMessageBox = component.createObject(window)
-                windowMyMessageBox.show()
+            TextField {
+                placeholderText: "password"
+                width: window.width * 0.7
+                font.pixelSize: window.width / 16
+                background: Rectangle {
+                    radius: 10
+                    border.color: "#FFFFFF"
+                    border.width: 2
+                }
             }
-            background: Rectangle {
-                radius: 10
-                color: "#00CC00"
-                border.color: "#FFFFFF"
-                border.width: 2
+            Button {
+                text: "Login"
+                width: login.width
+                height: login.height
+                font: login.font
+                onClicked: {
+                    stackView.replace("qrc:/content/tabs.qml")
+                }
+                background: Rectangle {
+                    radius: 10
+                    color: "#00CC00"
+                    border.color: "#FFFFFF"
+                    border.width: 2
+                }
             }
         }
     }
