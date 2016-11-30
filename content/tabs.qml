@@ -8,6 +8,16 @@ Page {
         id: tabBar
         currentIndex: swipeView.currentIndex
         implicitHeight: Screen.width / tabBar.count
+        onCurrentIndexChanged: {
+            console.log("TabBar currentIndex: " + currentIndex)
+            updateTabBar(currentIndex)
+        }
+        function updateTabBar(currentIndex)
+        {
+            for (var i = 0; i < tabsOfTabBar.count; ++i)
+                tabsOfTabBar.itemAt(i).refreshImage()
+            tabsOfTabBar.itemAt(currentIndex).setClickedTabImage()
+        }
         Repeater {
             id: tabsOfTabBar
             model: 5
@@ -17,6 +27,10 @@ Page {
                 {
                     image.source = "images/tab"+(index+1)+".png"
                 }
+                function setClickedTabImage()
+                {
+                    image.source = "images/tab"+(index+1)+"clicked.png"
+                }
                 Image {
                     id: image
                     anchors.fill: parent
@@ -24,9 +38,7 @@ Page {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            for (var i = 0; i < tabsOfTabBar.count; ++i)
-                                tabsOfTabBar.itemAt(i).refreshImage()
-                            image.source = "images/tab"+(index+1)+"clicked.png"
+                            tabBar.currentIndex = index
                         }
                     }
                 }
@@ -37,6 +49,11 @@ Page {
         id: swipeView
         anchors.fill: parent
         currentIndex: tabBar.currentIndex
+        onCurrentIndexChanged: {
+            console.log("SwipeView currentIndex: " + currentIndex)
+            if (tabBar.currentIndex !== currentIndex)
+                tabBar.currentIndex = currentIndex
+        }
 
         Item {
             width: swipeView.width
