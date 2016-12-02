@@ -43,38 +43,36 @@ import QtQuick.Window 2.2
 import QtQuick.Controls 1.2
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.1
-//import QtQuick.Dialogs 1.2
 import "content"
 
 StackView {
-    id: stackView
-    anchors.fill: parent
+    id: root
+    width: Screen.width
+    height: Screen.height
+    property int maxLen: Screen.width > Screen.height ? Screen.height : Screen.width
 
     initialItem: Rectangle {
-        id: window
-        width: Screen.width
-        height: Screen.height
         color: "#00E000"
 
         Image {
-            id: img_login
             source: "content/images/login_money.png"
             anchors.horizontalCenter: parent.horizontalCenter
-            y: height / 2
+            y: root.height / 2 - height
         }
 
         Grid {
             id: buttons
             columns: 1
-            rowSpacing: window.width / 36
+            rowSpacing: maxLen / 36
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: img_login.height / 2
+            anchors.bottomMargin: maxLen / 10
             anchors.horizontalCenter: parent.horizontalCenter
+
             TextField {
-                id: login
+                id: textField
                 placeholderText: "login name"
-                width: window.width * 0.7
-                font.pixelSize: window.width / 16
+                width: maxLen * 0.7
+                font.pixelSize: maxLen / 16
                 background: Rectangle {
                     radius: 10
                     border.color: "#FFFFFF"
@@ -83,8 +81,8 @@ StackView {
             }
             TextField {
                 placeholderText: "password"
-                width: window.width * 0.7
-                font.pixelSize: window.width / 16
+                width: textField.width
+                font: textField.font
                 background: Rectangle {
                     radius: 10
                     border.color: "#FFFFFF"
@@ -93,11 +91,11 @@ StackView {
             }
             Button {
                 text: "Login"
-                width: login.width
-                height: login.height
-                font: login.font
+                width: textField.width
+                height: textField.height
+                font: textField.font
                 onClicked: {
-                    stackView.replace("qrc:/content/tabs.qml")
+                    root.replace("qrc:/content/tabs.qml")
                 }
                 background: Rectangle {
                     radius: 10
