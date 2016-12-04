@@ -49,8 +49,12 @@ StackView {
     id: root
     width: Screen.width
     height: Screen.height
-    property int maxLen: Screen.width < Screen.height ? Screen.width : Screen.height
-    property bool isAlbum: Screen.width > Screen.height ? true : false
+    property int g_maxLen: Screen.width < Screen.height ? Screen.width : Screen.height
+    property bool g_isAlbum: Screen.width > Screen.height ? true : false
+    property font g_fieldFont: Qt.font({
+        family: "Times New Roman",
+        pixelSize: g_maxLen / 16
+    })
 
     initialItem: Qt.resolvedUrl("content/tabs.qml")
 //    initialItem: Rectangle {

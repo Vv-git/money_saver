@@ -18,5 +18,6 @@
         <file>content/Tab2.qml</file>
         <file>content/Tab3.qml</file>
         <file>content/Tab4.qml</file>
+        <file>content/FieldBackground.qml</file>
     </qresource>
 </RCC>
