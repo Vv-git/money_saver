@@ -1,49 +1,51 @@
-import QtQuick 2.0
+import QtQuick 2.5
 import QtQuick.Controls 2.0
 import Qt.labs.settings 1.0
 import QtQuick.Window 2.1
+import QtQuick.Layouts 1.1
 
 Item {
-    width: parent.width
-    height: parent.height
+    anchors.fill: parent
     Settings {
         id: settings
         property int money: 730
     }
-    Column {
+    ColumnLayout {
         spacing: 40
         width: parent.width
-        Row {
+        RowLayout {
             width: parent.width
-//            anchors.leftMargin: Screen.width / 20
-//            anchors.topMargin: Screen.height / 20
+            anchors.top: parent.top
+            anchors.topMargin: maxLen / 30
+            anchors.left: parent.left
+            anchors.leftMargin: maxLen / 18
             Label {
+                id: lbl_money
                 wrapMode: Label.Wrap
-                horizontalAlignment: Qt.AlignLeft
-                anchors.bottom: parent.bottom
-                text: settings.money
-                font.pixelSize: root.width / 10
-                color: "#33FF99"
-            }
-            Label {
-                wrapMode: Label.Wrap
-                horizontalAlignment: Qt.AlignLeft
-                anchors.bottom: parent.bottom
-                text: " $"
-                font.pixelSize: root.width / 14
+                text: settings.money + " $"
+                font.italic: true
+                font.bold: true
+                font.family: "Courier"
+                font.pixelSize: maxLen / 12
                 color: "#33FF99"
             }
 
         }
         TextField {
             placeholderText: "0"
-            width: root.width / 2
-            font.pixelSize: root.width / 16
+            implicitWidth: root.width / 2
+            validator: IntValidator{bottom: 0}
+            font.pixelSize: maxLen / 16
             anchors.horizontalCenter: parent.horizontalCenter
             background: Rectangle {
                 radius: 30
                 color: "#CCFFCC"
             }
         }
+//        ComboBox {
+//            model: ["First", "Second", "Third"]
+//            width: Math.max(implicitWidth, Math.min(implicitWidth * 2, pane.availableWidth / 3))
+//            anchors.horizontalCenter: parent.horizontalCenter
+//        }
     }
 }

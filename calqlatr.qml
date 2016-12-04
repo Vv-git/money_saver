@@ -49,61 +49,63 @@ StackView {
     id: root
     width: Screen.width
     height: Screen.height
-    property int maxLen: Screen.width > Screen.height ? Screen.height : Screen.width
+    property int maxLen: Screen.width < Screen.height ? Screen.width : Screen.height
+    property bool isAlbum: Screen.width > Screen.height ? true : false
 
-    initialItem: Rectangle {
-        color: "#00E000"
+    initialItem: Qt.resolvedUrl("content/tabs.qml")
+//    initialItem: Rectangle {
+//        color: "#00E000"
 
-        Image {
-            source: "content/images/login_money.png"
-            anchors.horizontalCenter: parent.horizontalCenter
-            y: root.height / 2 - height
-        }
+//        Image {
+//            source: "content/images/login_money.png"
+//            anchors.horizontalCenter: parent.horizontalCenter
+//            y: root.height / 2 - height
+//        }
 
-        Grid {
-            id: buttons
-            columns: 1
-            rowSpacing: maxLen / 36
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: maxLen / 10
-            anchors.horizontalCenter: parent.horizontalCenter
+//        Grid {
+//            id: buttons
+//            columns: 1
+//            rowSpacing: maxLen / 36
+//            anchors.bottom: parent.bottom
+//            anchors.bottomMargin: maxLen / 10
+//            anchors.horizontalCenter: parent.horizontalCenter
 
-            TextField {
-                id: textField
-                placeholderText: "login name"
-                width: maxLen * 0.7
-                font.pixelSize: maxLen / 16
-                background: Rectangle {
-                    radius: 10
-                    border.color: "#FFFFFF"
-                    border.width: 2
-                }
-            }
-            TextField {
-                placeholderText: "password"
-                width: textField.width
-                font: textField.font
-                background: Rectangle {
-                    radius: 10
-                    border.color: "#FFFFFF"
-                    border.width: 2
-                }
-            }
-            Button {
-                text: "Login"
-                width: textField.width
-                height: textField.height
-                font: textField.font
-                onClicked: {
-                    root.replace("qrc:/content/tabs.qml")
-                }
-                background: Rectangle {
-                    radius: 10
-                    color: "#00CC00"
-                    border.color: "#FFFFFF"
-                    border.width: 2
-                }
-            }
-        }
-    }
+//            TextField {
+//                id: textField
+//                placeholderText: "login name"
+//                width: maxLen * 0.7
+//                font.pixelSize: maxLen / 16
+//                background: Rectangle {
+//                    radius: 10
+//                    border.color: "#FFFFFF"
+//                    border.width: 2
+//                }
+//            }
+//            TextField {
+//                placeholderText: "password"
+//                width: textField.width
+//                font: textField.font
+//                background: Rectangle {
+//                    radius: 10
+//                    border.color: "#FFFFFF"
+//                    border.width: 2
+//                }
+//            }
+//            Button {
+//                text: "Login"
+//                width: textField.width
+//                height: textField.height
+//                font: textField.font
+//                onClicked: {
+//                    root.replace("qrc:/content/tabs.qml")
+//                }
+//                background: Rectangle {
+//                    radius: 10
+//                    color: "#00CC00"
+//                    border.color: "#FFFFFF"
+//                    border.width: 2
+//                }
+//            }
+//        }
+//    }
 }
