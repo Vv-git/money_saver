@@ -1,17 +1,12 @@
 import QtQuick 2.5
 import QtQuick.Controls 2.0
-import Qt.labs.settings 1.0
 import QtQuick.Window 2.1
 import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
+import "Database.js" as Db
 
 Item {
     anchors.fill: parent
-    property bool isMoneyEntered: false
-    Settings {
-        id: settings
-        property int money: 730
-    }
     ColumnLayout {
         spacing: g_maxLen / 19
         width: parent.width
@@ -56,13 +51,14 @@ Item {
         ComboBox {
             id: cbx_category
             visible: txt_money.text === "" ? false : true
-            model: ["food", "taxi", "entertainment", "car", "bills", "lost"]
+            model: categoriesListModel //["food", "taxi", "entertainment", "car", "bills", "lost"]
             implicitWidth: root.width / 2.2
             anchors.horizontalCenter: parent.horizontalCenter
             font: g_fieldFont
             background: FieldBackground {}
         }
         TextField {
+            id: txt_note
             visible: txt_money.text === "" ? false : true
             placeholderText: "note"
             implicitWidth: root.width / 2.2
@@ -80,5 +76,11 @@ Item {
         width: g_isAlbum ? root.width / 2.2 : parent.width
         anchors.horizontalCenter: parent.horizontalCenter
         font.pixelSize: g_maxLen / 12
+        onClicked: {
+            settings.money -= parseInt(txt_money.text)
+            Db.insertRecord(txt_money.text, cbx_category.currentText, txt_note.text, Qt.formatDate(new Date(), "dd.MM.yyyy"))
+            updateRecords()
+            txt_money.text = ""
+        }
     }
 }

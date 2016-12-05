@@ -19,5 +19,6 @@
         <file>content/Tab3.qml</file>
         <file>content/Tab4.qml</file>
         <file>content/FieldBackground.qml</file>
+        <file>content/Database.js</file>
     </qresource>
 </RCC>

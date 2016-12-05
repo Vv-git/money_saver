@@ -43,6 +43,8 @@ import QtQuick.Window 2.2
 import QtQuick.Controls 1.2
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.1
+import Qt.labs.settings 1.0
+import "content/Database.js" as Db
 import "content"
 
 StackView {
@@ -55,6 +57,50 @@ StackView {
         family: "Times New Roman",
         pixelSize: g_maxLen / 16
     })
+    Item { //Settings
+        id: settings
+        property int money: 730
+    }
+    ListModel {
+        id: categoriesListModel
+        Component.onCompleted: {
+            Db.init()
+            updateCategories()
+        }
+    }
+    ListModel {
+        id: recordsListModel
+        Component.onCompleted: {
+            Db.init()
+            updateRecords()
+        }
+    }
+    function updateRecords() {
+        recordsListModel.clear()
+
+        var records = Db.getRecords()
+
+        for (var i = 0; i < records.length; i++) {
+            recordsListModel.append({
+                "recordId": records[i].id,
+                "recordPrice": records[i].price,
+                "recordCategory": records[i].category,
+                "recordNote": records[i].note,
+                "recordDate": records[i].date
+            })
+        }
+    }
+    function updateCategories() {
+        categoriesListModel.clear()
+
+        var records = Db.getCategories()
+
+        for (var i = 0; i < records.length; i++) {
+            categoriesListModel.append({
+                "text": records[i].content
+            })
+        }
+    }
 
     initialItem: Qt.resolvedUrl("content/tabs.qml")
 //    initialItem: Rectangle {
