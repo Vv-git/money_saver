@@ -45,7 +45,7 @@ Item {
 
                 Label {
                     Layout.fillWidth: true
-                    text: model.text + ""
+                    text: model.text
                 }
 
                 Button {

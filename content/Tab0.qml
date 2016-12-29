@@ -14,20 +14,24 @@ Item {
             width: parent.width
             Layout.minimumHeight: g_isAlbum ? g_maxLen / 8 : g_maxLen / 4
             Label {
-            id: lbl_money
-            x: 50
-            anchors.top: parent.top
-            anchors.topMargin: g_maxLen / 20
-            anchors.left: parent.left
-            anchors.leftMargin: g_maxLen / 12
-            wrapMode: Label.Wrap
-            text: settings.money + " $"
-            font.italic: true
-            font.bold: true
-            font.family: "Courier"
-            font.pixelSize: g_maxLen / 12
-            color: "#33FF99"
-        }
+                id: lbl_money
+                anchors.top: parent.top
+                anchors.topMargin: g_maxLen / 20
+                anchors.left: parent.left
+                anchors.leftMargin: g_maxLen / 12
+                wrapMode: Label.Wrap
+                text: settings.money + " $"
+                font.italic: true
+                font.bold: true
+                font.family: "Courier"
+                font.pixelSize: g_maxLen / 12
+                color: "#33FF99"
+                SequentialAnimation on scale {
+                    id: scaleAnim
+                    running: false
+                    NumberAnimation { from: 1; to: 1.8; easing.type: Easing.SineCurve }
+                }
+            }
         }
         TextField {
             id: txt_money
@@ -51,7 +55,7 @@ Item {
         ComboBox {
             id: cbx_category
             visible: txt_money.text === "" ? false : true
-            model: categoriesListModel //["food", "taxi", "entertainment", "car", "bills", "lost"]
+            model: categoriesListModel
             implicitWidth: root.width / 2.2
             anchors.horizontalCenter: parent.horizontalCenter
             font: g_fieldFont
@@ -77,8 +81,9 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         font.pixelSize: g_maxLen / 12
         onClicked: {
+            scaleAnim.running = true
             settings.money -= parseInt(txt_money.text)
-            Db.insertRecord(txt_money.text, cbx_category.currentText, txt_note.text, Qt.formatDate(new Date(), "dd.MM.yyyy"))
+            Db.insertRecord(txt_money.text, cbx_category.currentText, txt_note.text, Qt.formatDate(new Date(), "dd.MM.yy"))
             updateRecords()
             txt_money.text = ""
         }

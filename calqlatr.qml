@@ -44,8 +44,8 @@ import QtQuick.Controls 1.2
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.1
 import Qt.labs.settings 1.0
-import "content/Database.js" as Db
-import "content"
+import "qrc:content/Database.js" as Db
+import "qrc:content"
 
 StackView {
     id: root
@@ -53,11 +53,8 @@ StackView {
     height: Screen.height
     property int g_maxLen: Screen.width < Screen.height ? Screen.width : Screen.height
     property bool g_isAlbum: Screen.width > Screen.height ? true : false
-    property font g_fieldFont: Qt.font({
-        family: "Times New Roman",
-        pixelSize: g_maxLen / 16
-    })
-    Item { //Settings
+    property font g_fieldFont: Qt.font({family: "Times New Roman", pixelSize: g_maxLen / 16})
+    Settings {
         id: settings
         property int money: 730
     }
@@ -79,16 +76,41 @@ StackView {
         recordsListModel.clear()
 
         var records = Db.getRecords()
+        if (records.length === 0)
+            return
 
+        var currentDate = records[0].date
+        var currentRecords = []
+        var currentDateSum = 0
+        var currentRecordId = 0
         for (var i = 0; i < records.length; i++) {
-            recordsListModel.append({
+            if (currentDate !== records[i].date)
+            {
+                recordsListModel.append({
+                    "recordId": currentRecordId,
+                    "recordDate": currentDate,
+                    "recordSum": currentDateSum,
+                    "recordRecords": currentRecords
+                })
+                ++currentRecordId
+                currentDate = records[i].date
+                currentRecords = []
+                currentDateSum = 0
+            }
+            currentDateSum += parseInt(records[i].price)
+            currentRecords.push({
                 "recordId": records[i].id,
                 "recordPrice": records[i].price,
                 "recordCategory": records[i].category,
-                "recordNote": records[i].note,
-                "recordDate": records[i].date
+                "recordNote": records[i].note
             })
         }
+        recordsListModel.append({
+            "recordId": currentRecordId,
+            "recordDate": currentDate,
+            "recordSum": currentDateSum,
+            "recordRecords": currentRecords
+        })
     }
     function updateCategories() {
         categoriesListModel.clear()
@@ -102,60 +124,61 @@ StackView {
         }
     }
 
-    initialItem: Qt.resolvedUrl("content/tabs.qml")
-//    initialItem: Rectangle {
-//        color: "#00E000"
+    //initialItem: Qt.resolvedUrl("content/tabs.qml")
+    initialItem: Rectangle {
+        color: "#00E000"
 
-//        Image {
-//            source: "content/images/login_money.png"
-//            anchors.horizontalCenter: parent.horizontalCenter
-//            y: root.height / 2 - height
-//        }
+        Image {
+            source: "qrc:content/images/login_money.png"
+            anchors.horizontalCenter: parent.horizontalCenter
+            y: root.height / 2 - height
+        }
 
-//        Grid {
-//            id: buttons
-//            columns: 1
-//            rowSpacing: maxLen / 36
-//            anchors.bottom: parent.bottom
-//            anchors.bottomMargin: maxLen / 10
-//            anchors.horizontalCenter: parent.horizontalCenter
+        Grid {
+            id: buttons
+            columns: 1
+            rowSpacing: g_maxLen / 36
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: g_maxLen / 10
+            anchors.horizontalCenter: parent.horizontalCenter
 
-//            TextField {
-//                id: textField
-//                placeholderText: "login name"
-//                width: maxLen * 0.7
-//                font.pixelSize: maxLen / 16
-//                background: Rectangle {
-//                    radius: 10
-//                    border.color: "#FFFFFF"
-//                    border.width: 2
-//                }
-//            }
-//            TextField {
-//                placeholderText: "password"
-//                width: textField.width
-//                font: textField.font
-//                background: Rectangle {
-//                    radius: 10
-//                    border.color: "#FFFFFF"
-//                    border.width: 2
-//                }
-//            }
-//            Button {
-//                text: "Login"
-//                width: textField.width
-//                height: textField.height
-//                font: textField.font
-//                onClicked: {
-//                    root.replace("qrc:/content/tabs.qml")
-//                }
-//                background: Rectangle {
-//                    radius: 10
-//                    color: "#00CC00"
-//                    border.color: "#FFFFFF"
-//                    border.width: 2
-//                }
-//            }
-//        }
-//    }
+            TextField {
+                id: textField
+                placeholderText: "login name"
+                width: g_maxLen * 0.7
+                font.pixelSize: g_maxLen / 16
+                background: Rectangle {
+                    radius: 10
+                    border.color: "#FFFFFF"
+                    border.width: 2
+                }
+            }
+            TextField {
+                placeholderText: "password"
+                echoMode: "Password"
+                width: textField.width
+                font: textField.font
+                background: Rectangle {
+                    radius: 10
+                    border.color: "#FFFFFF"
+                    border.width: 2
+                }
+            }
+            Button {
+                text: "Login"
+                width: textField.width
+                height: textField.height
+                font: textField.font
+                onClicked: {
+                    root.replace("qrc:/content/tabs.qml")
+                }
+                background: Rectangle {
+                    radius: 10
+                    color: "#00CC00"
+                    border.color: "#FFFFFF"
+                    border.width: 2
+                }
+            }
+        }
+    }
 }

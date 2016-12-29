@@ -25,7 +25,7 @@ Page {
                 background: Rectangle {id: tabButtonBg; color: "#33FF00"}
                 function setClicked(isClicked)
                 {
-                    image.source = "images/tab" + index + (isClicked ? "clicked" : "") + ".png"
+                    image.source = "qrc:content/images/tab" + index + (isClicked ? "clicked" : "") + ".png"
                     tabButtonBg.color = isClicked ? "#FFFFFF" : "#33FF00"
                 }
                 Image {

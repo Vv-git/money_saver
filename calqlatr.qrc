@@ -20,5 +20,16 @@
         <file>content/Tab4.qml</file>
         <file>content/FieldBackground.qml</file>
         <file>content/Database.js</file>
+        <file>content/Tab2CurrentDate.qml</file>
+        <file>content/images/products/prod/prod0.jpg</file>
+        <file>content/images/products/prod/prod1.jpg</file>
+        <file>content/images/products/prod/prod2.jpg</file>
+        <file>content/images/products/prod/prod3.jpg</file>
+        <file>content/images/products/prod/prod4.jpg</file>
+        <file>content/images/products/prod/prod5.jpg</file>
+        <file>content/images/products/prod/prod6.jpg</file>
+        <file>content/images/products/prod/prod7.jpg</file>
+        <file>content/images/products/prod/prod8.jpg</file>
+        <file>content/images/products/prod/prod9.jpg</file>
     </qresource>
 </RCC>
