@@ -6,9 +6,8 @@ var db = Sql.LocalStorage.openDatabaseSync("Local Storage Example", "1.0", "Samp
 function init() {
     db.transaction(
         function(tx) {
-            tx.executeSql('CREATE TABLE IF NOT EXISTS SampleTable(id INTEGER PRIMARY KEY, price INTEGER, category TEXT, note TEXT, date TEXT);')
+            tx.executeSql('CREATE TABLE IF NOT EXISTS Purchase(id INTEGER PRIMARY KEY, price INTEGER, category TEXT, note TEXT, date TEXT);')
             tx.executeSql('CREATE TABLE IF NOT EXISTS Categories(id INTEGER PRIMARY KEY, content TEXT);')
-            //tx.executeSql('DROP TABLE IF EXISTS SampleTable;')
         }
     )
 }
@@ -54,7 +53,7 @@ function getRecords() {
 
     db.transaction(
         function(tx) {
-            var rs = tx.executeSql('SELECT * FROM SampleTable;');
+            var rs = tx.executeSql('SELECT * FROM Purchase;');
             for (var i = 0; i < rs.rows.length; ++i) {
                 var record = {
                     id: rs.rows.item(i).id,
@@ -74,7 +73,7 @@ function getRecords() {
 function insertRecord(price, category, note, date) {
     db.transaction(
         function(tx) {
-            tx.executeSql('INSERT INTO SampleTable VALUES(NULL, ?, ?, ?, ?);', [ price, category, note, date ]);
+            tx.executeSql('INSERT INTO Purchase VALUES(NULL, ?, ?, ?, ?);', [ price, category, note, date ]);
         }
     );
 }
