@@ -1,14 +1,14 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.1
-import "Database.js" as Db
+import "qrc:DbUtils.js" as DbUtils
 
 Item {
     anchors.fill: parent
 
     ColumnLayout {
         anchors.fill: parent
-        anchors.margins: spacing
+        anchors.margins: g_maxLen / 20
 
         Label {
             text: "Categories:"
@@ -17,18 +17,17 @@ Item {
 
         RowLayout {
             TextField {
-                id: textField
+                id: txt_category
                 Layout.fillWidth: true
                 inputMethodHints: Qt.ImhNoPredictiveText
             }
 
             Button {
                 text: "Insert"
-                enabled: textField.length > 0
+                enabled: txt_category.length > 0
 
                 onClicked: {
-                    Db.insertCategory(textField.text)
-                    updateCategories()
+                    DbUtils.insertCategory(categoriesListModel, txt_category.text)
                 }
             }
         }
@@ -51,8 +50,7 @@ Item {
                 Button {
                     text: "x"
                     onClicked: {
-                        Db.removeCategory(model.text)
-                        updateCategories()
+                        DbUtils.removeCategory(categoriesListModel, model.text)
                     }
                 }
             }

@@ -7,5 +7,5 @@ SOURCES += main.cpp
 RESOURCES += calqlatr.qrc
 
 OTHER_FILES = calqlatr.qml \
-    content/Database.js \
+    content/*.js \
     content/*.qml

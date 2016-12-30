@@ -3,8 +3,6 @@ import QtQuick 2.5
 import QtQuick.Controls 1.4
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.1
-import "Database.js" as Db
-
 
 ColumnLayout {
     id: column
@@ -30,17 +28,17 @@ ColumnLayout {
             header: header
             footer: footer
             anchors.horizontalCenter: parent.horizontalCenter
+            spacing: g_maxLen / 30
 
             model: recordsListModel.get(modelRecordId).recordRecords
 
             delegate: ColumnLayout {
-                anchors.left: parent.left
-                anchors.right: parent.right
+                anchors.horizontalCenter: parent.horizontalCenter
                 TextField {
                     id: txt_money
                     placeholderText: "0"
                     text: recordPrice
-                    width: root.width / 2
+                    width: root.width / 2.2
                     horizontalAlignment: Qt.AlignHCenter
                     implicitWidth: root.width / 2
                     validator: IntValidator {bottom: 0}
@@ -52,7 +50,7 @@ ColumnLayout {
                 TextField {
                     readOnly: true
                     text: recordCategory
-                    implicitWidth: root.width / 2.2
+                    implicitWidth: txt_money.width
                     anchors.horizontalCenter: parent.horizontalCenter
                     font: g_fieldFont
                     background: FieldBackground {}
@@ -61,26 +59,30 @@ ColumnLayout {
                     id: txt_note
                     placeholderText: "note"
                     text: recordNote
-                    implicitWidth: root.width / 2.2
+                    implicitWidth: txt_money.width
                     anchors.horizontalCenter: parent.horizontalCenter
                     font: g_fieldFont
                     background: FieldBackground {}
                     onAccepted: btn_save.forceActiveFocus()
                 }
-                Rectangle { implicitHeight: g_maxLen / 30 }
             }
         }
     }
     Component {
         id: footer
-        Button {
-            id: btn_save
-            text: "Save"
-            width: g_isAlbum ? root.width / 2.2 : parent.width
-            implicitWidth: g_isAlbum ? root.width / 2.2 : parent.width
+        Rectangle
+        {
+            height: btn_save.height + g_maxLen / 30
             anchors.horizontalCenter: parent.horizontalCenter
-            font.pixelSize: g_maxLen / 12
-            onClicked: { returnToTab2() }
+            Button {
+                id: btn_save
+                text: "Save"
+                width: g_isAlbum ? root.width / 2.2 : parent.width
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.bottom: parent.bottom
+                font.pixelSize: g_maxLen / 12
+                onClicked: { returnToTab2() }
+            }
         }
     }
 }

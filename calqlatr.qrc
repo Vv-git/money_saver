@@ -31,5 +31,7 @@
         <file>content/images/products/prod/prod7.jpg</file>
         <file>content/images/products/prod/prod8.jpg</file>
         <file>content/images/products/prod/prod9.jpg</file>
+        <file>content/LoginPage.qml</file>
+        <file>content/DbUtils.js</file>
     </qresource>
 </RCC>

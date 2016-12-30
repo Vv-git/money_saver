@@ -3,7 +3,7 @@ import QtQuick.Controls 2.0
 import QtQuick.Window 2.1
 import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
-import "Database.js" as Db
+import "qrc:DbUtils.js" as DbUtils
 
 Item {
     anchors.fill: parent
@@ -83,8 +83,7 @@ Item {
         onClicked: {
             scaleAnim.running = true
             settings.money -= parseInt(txt_money.text)
-            Db.insertRecord(txt_money.text, cbx_category.currentText, txt_note.text, Qt.formatDate(new Date(), "dd.MM.yy"))
-            updateRecords()
+            DbUtils.insertRecord(recordsListModel, txt_money.text, cbx_category.currentText, txt_note.text, Qt.formatDate(new Date(), "dd.MM.yy"))
             txt_money.text = ""
         }
     }

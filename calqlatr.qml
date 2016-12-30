@@ -40,12 +40,11 @@
 
 import QtQuick 2.4
 import QtQuick.Window 2.2
-import QtQuick.Controls 1.2
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.1
 import Qt.labs.settings 1.0
-import "qrc:content/Database.js" as Db
 import "qrc:content"
+import "qrc:content/DbUtils.js" as DbUtils
 
 StackView {
     id: root
@@ -60,125 +59,15 @@ StackView {
     }
     ListModel {
         id: categoriesListModel
-        Component.onCompleted: {
-            Db.init()
-            updateCategories()
-        }
     }
     ListModel {
         id: recordsListModel
-        Component.onCompleted: {
-            Db.init()
-            updateRecords()
-        }
     }
-    function updateRecords() {
-        recordsListModel.clear()
-
-        var records = Db.getRecords()
-        if (records.length === 0)
-            return
-
-        var currentDate = records[0].date
-        var currentRecords = []
-        var currentDateSum = 0
-        var currentRecordId = 0
-        for (var i = 0; i < records.length; i++) {
-            if (currentDate !== records[i].date)
-            {
-                recordsListModel.append({
-                    "recordId": currentRecordId,
-                    "recordDate": currentDate,
-                    "recordSum": currentDateSum,
-                    "recordRecords": currentRecords
-                })
-                ++currentRecordId
-                currentDate = records[i].date
-                currentRecords = []
-                currentDateSum = 0
-            }
-            currentDateSum += parseInt(records[i].price)
-            currentRecords.push({
-                "recordId": records[i].id,
-                "recordPrice": records[i].price,
-                "recordCategory": records[i].category,
-                "recordNote": records[i].note
-            })
-        }
-        recordsListModel.append({
-            "recordId": currentRecordId,
-            "recordDate": currentDate,
-            "recordSum": currentDateSum,
-            "recordRecords": currentRecords
-        })
-    }
-    function updateCategories() {
-        categoriesListModel.clear()
-
-        var records = Db.getCategories()
-
-        for (var i = 0; i < records.length; i++) {
-            categoriesListModel.append({
-                "text": records[i].content
-            })
-        }
+    Component.onCompleted: {
+        DbUtils.initDb()
+        DbUtils.updateCategories(categoriesListModel)
+        DbUtils.updateRecords(recordsListModel)
     }
 
-    //initialItem: Qt.resolvedUrl("content/tabs.qml")
-    initialItem: Rectangle {
-        color: "#00E000"
-
-        Image {
-            source: "qrc:content/images/login_money.png"
-            anchors.horizontalCenter: parent.horizontalCenter
-            y: root.height / 2 - height
-        }
-
-        Grid {
-            id: buttons
-            columns: 1
-            rowSpacing: g_maxLen / 36
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: g_maxLen / 10
-            anchors.horizontalCenter: parent.horizontalCenter
-
-            TextField {
-                id: textField
-                placeholderText: "login name"
-                width: g_maxLen * 0.7
-                font.pixelSize: g_maxLen / 16
-                background: Rectangle {
-                    radius: 10
-                    border.color: "#FFFFFF"
-                    border.width: 2
-                }
-            }
-            TextField {
-                placeholderText: "password"
-                echoMode: "Password"
-                width: textField.width
-                font: textField.font
-                background: Rectangle {
-                    radius: 10
-                    border.color: "#FFFFFF"
-                    border.width: 2
-                }
-            }
-            Button {
-                text: "Login"
-                width: textField.width
-                height: textField.height
-                font: textField.font
-                onClicked: {
-                    root.replace("qrc:/content/tabs.qml")
-                }
-                background: Rectangle {
-                    radius: 10
-                    color: "#00CC00"
-                    border.color: "#FFFFFF"
-                    border.width: 2
-                }
-            }
-        }
-    }
+    initialItem: Qt.resolvedUrl("content/LoginPage.qml")
 }

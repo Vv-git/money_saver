@@ -3,7 +3,6 @@ import QtQuick 2.5
 import QtQuick.Controls 1.4
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.1
-import "Database.js" as Db
 
 StackView {
     id: stackTab2
@@ -74,7 +73,6 @@ StackView {
                         text: model.price + " $"
                         anchors.right: parent.right
                         anchors.rightMargin: g_maxLen / 10
-                        width: g_maxLen / 10
                         font.italic: true
                         font.bold: true
                         font.family: "Courier"

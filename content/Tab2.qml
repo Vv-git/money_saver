@@ -2,7 +2,6 @@ import QtQml 2.2
 import QtQuick 2.0
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.1
-import "Database.js" as Db
 
 StackView {
     id: stackTab2
@@ -57,14 +56,17 @@ StackView {
                         color: "#99FF66"
                     }
                 }
-                Rectangle { implicitHeight: g_maxLen / 70 }
-                Rectangle {
-                    implicitWidth: root.width / 1.4
-                    implicitHeight: 2
-                    color: "#33FF99"
+                Rectangle
+                {
+                    height: g_maxLen / 33
                     anchors.horizontalCenter: parent.horizontalCenter
+                    Rectangle {
+                        implicitWidth: root.width / 1.4
+                        implicitHeight: 2
+                        color: "#33FF99"
+                        anchors.centerIn: parent
+                    }
                 }
-                Rectangle { implicitHeight: g_maxLen / 40 }
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {

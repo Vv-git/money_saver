@@ -46,8 +46,9 @@ Page {
         anchors.fill: parent
         currentIndex: tabBar.currentIndex
         onCurrentIndexChanged: {
-            if (tabBar.currentIndex !== currentIndex)
+            if (tabBar.currentIndex !== currentIndex) {
                 tabBar.currentIndex = currentIndex
+            }
         }
 
         Item { width: swipeView.width; height: swipeView.height; Tab0 {} }

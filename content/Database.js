@@ -19,7 +19,7 @@ function getCategories() {
     db.transaction(
         function(tx) {
             var rs = tx.executeSql('SELECT * FROM Categories;');
-            for (var i = 0; i < rs.rows.length; i++) {
+            for (var i = 0; i < rs.rows.length; ++i) {
                 var record = {
                     id: rs.rows.item(i).id,
                     content: rs.rows.item(i).content
@@ -55,7 +55,7 @@ function getRecords() {
     db.transaction(
         function(tx) {
             var rs = tx.executeSql('SELECT * FROM SampleTable;');
-            for (var i = 0; i < rs.rows.length; i++) {
+            for (var i = 0; i < rs.rows.length; ++i) {
                 var record = {
                     id: rs.rows.item(i).id,
                     price: rs.rows.item(i).price,
@@ -75,14 +75,6 @@ function insertRecord(price, category, note, date) {
     db.transaction(
         function(tx) {
             tx.executeSql('INSERT INTO SampleTable VALUES(NULL, ?, ?, ?, ?);', [ price, category, note, date ]);
-        }
-    );
-}
-
-function removeRecord(id) {
-    db.transaction(
-        function(tx) {
-            tx.executeSql('DELETE FROM SampleTable WHERE id=?;', [ id ]);
         }
     );
 }

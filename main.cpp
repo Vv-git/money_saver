@@ -53,7 +53,8 @@ int main(int argc, char *argv[])
     app.setOrganizationDomain("qt-project.org");
     app.setApplicationName(QFileInfo(app.applicationFilePath()).baseName());
     QQuickView view;
-    if (qgetenv("QT_QUICK_CORE_PROFILE").toInt()) {
+    if (qgetenv("QT_QUICK_CORE_PROFILE").toInt())
+    {
         QSurfaceFormat f = view.format();
         f.setProfile(QSurfaceFormat::CoreProfile);
         f.setVersion(4, 4);
@@ -63,10 +64,13 @@ int main(int argc, char *argv[])
     new QQmlFileSelector(view.engine(), &view);
     view.setSource(QUrl("qrc:///calqlatr.qml"));
     if (view.status() == QQuickView::Error)
+    {
         return -1;
+    }
     view.setResizeMode(QQuickView::SizeRootObjectToView);
     if (QGuiApplication::platformName() == QLatin1String("qnx") ||
-          QGuiApplication::platformName() == QLatin1String("eglfs")) {
+          QGuiApplication::platformName() == QLatin1String("eglfs"))
+    {
         view.showFullScreen();
     } else {
         view.show();
