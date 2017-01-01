@@ -51,10 +51,10 @@ Page {
             }
         }
 
-        Item { width: swipeView.width; height: swipeView.height; Tab0 {} }
-        Item { width: swipeView.width; height: swipeView.height; Tab1 {} }
-        Item { width: swipeView.width; height: swipeView.height; Tab2 {} }
-        Item { width: swipeView.width; height: swipeView.height; Tab3 {} }
-        Item { width: swipeView.width; height: swipeView.height; Tab4 {} }
+        Item { width: swipeView.width; height: swipeView.height; TabAddCost {} }
+        Item { width: swipeView.width; height: swipeView.height; TabChart {} }
+        Item { width: swipeView.width; height: swipeView.height; TabCostsList {} }
+        Item { width: swipeView.width; height: swipeView.height; TabProducts {} }
+        Item { width: swipeView.width; height: swipeView.height; TabSettings {} }
     }
 }

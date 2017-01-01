@@ -13,14 +13,14 @@
         <file>content/images/tab4clicked.png</file>
         <file>content/images/tab0.png</file>
         <file>content/images/tab0clicked.png</file>
-        <file>content/Tab0.qml</file>
-        <file>content/Tab1.qml</file>
-        <file>content/Tab2.qml</file>
-        <file>content/Tab3.qml</file>
-        <file>content/Tab4.qml</file>
+        <file>content/TabAddCost.qml</file>
+        <file>content/TabChart.qml</file>
+        <file>content/TabCostsList.qml</file>
+        <file>content/TabProducts.qml</file>
+        <file>content/TabSettings.qml</file>
         <file>content/FieldBackground.qml</file>
         <file>content/Database.js</file>
-        <file>content/Tab2CurrentDate.qml</file>
+        <file>content/TabCostsListOnDay.qml</file>
         <file>content/images/products/prod/prod0.jpg</file>
         <file>content/images/products/prod/prod1.jpg</file>
         <file>content/images/products/prod/prod2.jpg</file>

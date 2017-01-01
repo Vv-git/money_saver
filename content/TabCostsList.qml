@@ -7,7 +7,7 @@ StackView {
     id: stackTab2
     anchors.fill: parent
     property int modelRecordId: 0
-    function returnToTab2() { stackTab2.replace("qrc:/content/Tab2.qml") }
+    function returnToTab2() { stackTab2.replace("qrc:/content/TabCostsList.qml") }
 
     initialItem: ColumnLayout {
         RowLayout {
@@ -71,7 +71,7 @@ StackView {
                     anchors.fill: parent
                     onClicked: {
                         modelRecordId = model.recordId
-                        stackTab2.replace("qrc:/content/Tab2CurrentDate.qml")
+                        stackTab2.replace("qrc:/content/TabCostsListOnDay.qml")
                     }
                 }
             }
