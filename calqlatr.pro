@@ -1,5 +1,6 @@
 TEMPLATE = app
 
+
 QT += qml quick charts widgets
 
 SOURCES += main.cpp
