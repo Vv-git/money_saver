@@ -41,9 +41,6 @@ StackView {
                 RowLayout {
                     anchors.left: parent.left
                     anchors.right: parent.right
-                    Component.onCompleted: {
-                        console.log(model.index)
-                    }
                     Label {
                         text: model.recordDate + ""
                         anchors.left: parent.left

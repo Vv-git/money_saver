@@ -18,6 +18,7 @@ Item {
             TextField {
                 id: txt_money
                 Layout.fillWidth: true
+                validator: IntValidator{}
                 inputMethodHints: Qt.ImhNoPredictiveText
             }
             Button {

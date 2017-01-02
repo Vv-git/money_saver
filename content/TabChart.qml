@@ -49,6 +49,7 @@ Item {
                 }
             }
             pieSeries.append(categories[i].content, sum);
+
             pieSeries.at(i).labelVisible = true
             pieSeries.at(i).labelPosition = PieSlice.LabelOutside
             pieSeries.at(i).labelColor = "#00CC00"

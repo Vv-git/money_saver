@@ -69,5 +69,5 @@ StackView {
         DbUtils.updateRecords(recordsListModel)
     }
 
-    initialItem: Qt.resolvedUrl("content/Tabs.qml")
+    initialItem: Qt.resolvedUrl("content/LoginPage.qml")
 }
