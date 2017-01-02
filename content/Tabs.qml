@@ -5,20 +5,20 @@ import QtQuick.Window 2.1
 Page {
     header: TabBar {
         id: tabBar
-        currentIndex: swipeView.currentIndex
+        currentIndex: tabsView.currentIndex
         property int prevIndex: -1
-        implicitHeight: g_isAlbum ? g_maxLen/(1.9*tabBar.count) : g_maxLen / tabBar.count
+        implicitHeight: g_maxLen / (tabBar.count * (g_isAlbum ? 1.9 : 1))
         onCurrentIndexChanged: {
             if (prevIndex === -1) {
                 prevIndex = 0
                 return
             }
-            tabsOfTabBar.itemAt(prevIndex).setClicked(false)
-            tabsOfTabBar.itemAt(currentIndex).setClicked(true)
+            tabsButtons.itemAt(prevIndex).setClicked(false)
+            tabsButtons.itemAt(currentIndex).setClicked(true)
             prevIndex = currentIndex
         }
         Repeater {
-            id: tabsOfTabBar
+            id: tabsButtons
             model: 5
             TabButton {
                 implicitHeight: tabBar.implicitHeight
@@ -42,7 +42,7 @@ Page {
         }
     }
     SwipeView {
-        id: swipeView
+        id: tabsView
         anchors.fill: parent
         currentIndex: tabBar.currentIndex
         onCurrentIndexChanged: {
@@ -51,10 +51,10 @@ Page {
             }
         }
 
-        Item { width: swipeView.width; height: swipeView.height; TabAddCost {} }
-        Item { width: swipeView.width; height: swipeView.height; TabChart {} }
-        Item { width: swipeView.width; height: swipeView.height; TabCostsList {} }
-        Item { width: swipeView.width; height: swipeView.height; TabProducts {} }
-        Item { width: swipeView.width; height: swipeView.height; TabSettings {} }
+        Item { width: tabsView.width; height: tabsView.height; TabAddCost {} }
+        Item { width: tabsView.width; height: tabsView.height; TabChart {} }
+        Item { width: tabsView.width; height: tabsView.height; TabCostsList {} }
+        Item { width: tabsView.width; height: tabsView.height; TabProducts {} }
+        Item { width: tabsView.width; height: tabsView.height; TabSettings {} }
     }
 }

@@ -46,7 +46,7 @@ Rectangle {
             height: textField.height
             font: textField.font
             onClicked: {
-                root.replace("qrc:/content/tabs.qml")
+                root.replace("qrc:/content/Tabs.qml")
             }
             background: Rectangle {
                 radius: 10

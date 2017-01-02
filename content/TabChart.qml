@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.6
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.1
 import QtCharts 2.0
@@ -6,13 +6,33 @@ import "qrc:Database.js" as Db
 
 Item {
     anchors.fill: parent
+
     ChartView {
         id: chart
         anchors.fill: parent
         antialiasing: true
         animationOptions: ChartView.SeriesAnimations
-        PieSeries { id: pieSeries }
+        legend.visible: false
+        PieSeries {
+            id: pieSeries
+            property string lastClickedSliceLabel
+            property PieSlice lastClickedSlice
+            onClicked: {
+                if (lastClickedSlice && lastClickedSlice !== slice)
+                {
+                    lastClickedSlice.exploded = false
+                    lastClickedSlice.label = lastClickedSliceLabel
+                }
+
+                slice.exploded = !slice.exploded
+
+                lastClickedSliceLabel = slice.exploded ? slice.label : lastClickedSliceLabel
+                slice.label = slice.exploded ? slice.value + " $" : lastClickedSliceLabel
+                lastClickedSlice = slice
+            }
+        }
     }
+
     Component.onCompleted: {
         var records = Db.getRecords()
         var categories = Db.getCategories()
@@ -29,6 +49,10 @@ Item {
                 }
             }
             pieSeries.append(categories[i].content, sum);
+            pieSeries.at(i).labelVisible = true
+            pieSeries.at(i).labelPosition = PieSlice.LabelOutside
+            pieSeries.at(i).labelColor = "#00CC00"
+            pieSeries.at(i).labelFont = g_fieldFont
         }
     }
 }

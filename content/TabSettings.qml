@@ -11,21 +11,37 @@ Item {
         anchors.margins: g_maxLen / 20
 
         Label {
+            text: "Money: " + settings.money + " $"
+            font: g_fieldFont
+        }
+        RowLayout {
+            TextField {
+                id: txt_money
+                Layout.fillWidth: true
+                inputMethodHints: Qt.ImhNoPredictiveText
+            }
+            Button {
+                text: "Save"
+                enabled: txt_money.length > 0
+                onClicked: {
+                    settings.money = parseInt(txt_money.text)
+                }
+            }
+        }
+
+        Label {
             text: "Categories:"
             font: g_fieldFont
         }
-
         RowLayout {
             TextField {
                 id: txt_category
                 Layout.fillWidth: true
                 inputMethodHints: Qt.ImhNoPredictiveText
             }
-
             Button {
-                text: "Insert"
+                text: "Add"
                 enabled: txt_category.length > 0
-
                 onClicked: {
                     DbUtils.insertCategory(categoriesListModel, txt_category.text)
                 }
@@ -46,7 +62,6 @@ Item {
                     Layout.fillWidth: true
                     text: model.text
                 }
-
                 Button {
                     text: "x"
                     onClicked: {

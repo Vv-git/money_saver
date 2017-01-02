@@ -24,21 +24,26 @@ StackView {
                 validator: RegExpValidator {regExp: /^[0-3][0-9]\.[0-2][0-9]\.[0-9][0-9]$/}
                 font: g_fieldFont
                 background: FieldBackground {}
-                onAccepted: {}
             }
         }
         ListView {
+            id: listViewRecords
             Layout.fillWidth: true
             Layout.fillHeight: true
 
             model: recordsListModel
 
             delegate: ColumnLayout {
-                    anchors.left: parent.left
-                    anchors.right: parent.right
+                visible: txt_date.text === "" || txt_date.text === model.recordDate
+                height: visible ? g_maxLen / 9 : 0
+                anchors.left: parent.left
+                anchors.right: parent.right
                 RowLayout {
                     anchors.left: parent.left
                     anchors.right: parent.right
+                    Component.onCompleted: {
+                        console.log(model.index)
+                    }
                     Label {
                         text: model.recordDate + ""
                         anchors.left: parent.left

@@ -6,6 +6,6 @@ SOURCES += main.cpp
 
 RESOURCES += calqlatr.qrc
 
-OTHER_FILES = calqlatr.qml \
+OTHER_FILES = main.qml\
     content/*.js \
     content/*.qml

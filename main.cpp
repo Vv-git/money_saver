@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
     }
     view.connect(view.engine(), &QQmlEngine::quit, &app, &QCoreApplication::quit);
     new QQmlFileSelector(view.engine(), &view);
-    view.setSource(QUrl("qrc:///calqlatr.qml"));
+    view.setSource(QUrl("qrc:///main.qml"));
     if (view.status() == QQuickView::Error)
     {
         return -1;

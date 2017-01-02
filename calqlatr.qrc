@@ -1,12 +1,12 @@
 <RCC>
     <qresource prefix="/">
-        <file>calqlatr.qml</file>
+        <file>main.qml</file>
         <file>content/images/login_money.png</file>
         <file>content/images/tab1.png</file>
         <file>content/images/tab2.png</file>
         <file>content/images/tab3.png</file>
         <file>content/images/tab4.png</file>
-        <file>content/tabs.qml</file>
+        <file>content/Tabs.qml</file>
         <file>content/images/tab1clicked.png</file>
         <file>content/images/tab2clicked.png</file>
         <file>content/images/tab3clicked.png</file>
